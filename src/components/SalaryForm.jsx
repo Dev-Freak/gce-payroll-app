@@ -8,7 +8,6 @@ import {
   Row,
   Col,
   UncontrolledDropdown,
-  Dropdown,
   ButtonGroup,
   DropdownToggle,
   DropdownMenu,
@@ -18,7 +17,7 @@ import {
 const SalaryForm = ({ handleSubmit }) => {
   const [salary, setSalary] = useState(10000);
   const [country, setCountry] = useState(null);
-  const [currency, setCurrency] = useState(null);
+  const [currency] = useState(null);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
