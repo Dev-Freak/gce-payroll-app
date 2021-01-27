@@ -16,7 +16,14 @@ function App() {
     setIsLoading(true);
     setSubData(null);
 
-    const res = await axios.post("http://localhost:3000/api/payroll", request);
+    var URL = "";
+    if (window.location.href.includes("localhost")) {
+      URL = "http://localhost:3000";
+    } else {
+      URL = "https://gce-payroll-service.herokuapp.com";
+    }
+
+    const res = await axios.post(`${URL}/api/payroll`, request);
     setData(res.data);
   };
 
