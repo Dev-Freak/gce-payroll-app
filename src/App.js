@@ -9,22 +9,28 @@ import "./App.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [requestHasError, setRequestHasError] = useState(false);
   const [data, setData] = useState(null);
   const [subData, setSubData] = useState(null);
 
   const handleFormSubmit = async (request) => {
-    setIsLoading(true);
-    setSubData(null);
-
-    var URL = "";
-    if (window.location.href.includes("localhost")) {
-      URL = "http://localhost:3000";
+    if (!request.country || !request.salary || !request.currency) {
+      setRequestHasError(true);
     } else {
-      URL = "https://gce-payroll-service.herokuapp.com";
-    }
+      setRequestHasError(false);
+      setIsLoading(true);
+      setSubData(null);
 
-    const res = await axios.post(`${URL}/api/payroll`, request);
-    setData(res.data);
+      var URL = "";
+      if (window.location.href.includes("localhost")) {
+        URL = "http://localhost:3000";
+      } else {
+        URL = "https://gce-payroll-service.herokuapp.com";
+      }
+
+      const res = await axios.post(`${URL}/api/payroll`, request);
+      setData(res.data);
+    }
   };
 
   useEffect(() => {
@@ -44,7 +50,9 @@ function App() {
       </div>
 
       <div className="section landing-section">
-        {isLoading ? (
+        {requestHasError ? (
+          <h4>Please select a country</h4>
+        ) : isLoading ? (
           <Spinner />
         ) : (
           <Container>
@@ -55,7 +63,13 @@ function App() {
                 )}
               </Col>
 
-              <Col>{subData && <TaxDetails data={subData} />}</Col>
+              <Col>
+                {subData ? (
+                  <TaxDetails data={subData} />
+                ) : data ? (
+                  <h4>There are no details to show.</h4>
+                ) : null}
+              </Col>
             </Row>
           </Container>
         )}

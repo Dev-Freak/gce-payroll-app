@@ -16,8 +16,8 @@ import {
 
 const SalaryForm = ({ handleSubmit }) => {
   const [salary, setSalary] = useState(10000);
-  const [country, setCountry] = useState(null);
-  const [currency] = useState(null);
+  const [country, setCountry] = useState("");
+  const [currency, setCurrency] = useState("USD");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -27,8 +27,6 @@ const SalaryForm = ({ handleSubmit }) => {
       country: country,
       currency: currency,
     };
-
-    console.log(request);
 
     handleSubmit(request);
   };
@@ -46,6 +44,7 @@ const SalaryForm = ({ handleSubmit }) => {
               placeholder="Enter base salary..."
               value={salary}
               onChange={(e) => setSalary(e.target.value)}
+              required={true}
             />
           </FormGroup>
         </Col>
@@ -83,7 +82,8 @@ const SalaryForm = ({ handleSubmit }) => {
               id="country"
               placeholder="Select a country"
               value={country}
-              disabled={true}
+              readOnly={true}
+              required={true}
             />
           </FormGroup>
         </Col>
@@ -95,8 +95,8 @@ const SalaryForm = ({ handleSubmit }) => {
               type="text"
               id="currency"
               placeholder="Select a currency"
-              value="USD"
-              onChange={(e) => console.log(e.target.value)}
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
             />
           </FormGroup>
         </Col>
