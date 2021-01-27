@@ -49,7 +49,7 @@ function App() {
         </Container>
       </div>
 
-      <div className="section landing-section">
+      <div className="section landing-section" style={{ paddingTop: "0px" }}>
         {requestHasError ? (
           <h4>Please select a country</h4>
         ) : isLoading ? (
