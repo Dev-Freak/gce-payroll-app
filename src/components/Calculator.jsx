@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "reactstrap";
 import { formatTaxTableHeader } from "../utils/formatStrings";
 
-const PayrollCalculation = ({ data, onSelectRow }) => {
+const Calculator = ({ data, onSelectRow }) => {
   return (
     <Table striped>
       <thead>
@@ -47,4 +47,4 @@ const PayrollCalculation = ({ data, onSelectRow }) => {
   );
 };
 
-export default PayrollCalculation;
+export default Calculator;

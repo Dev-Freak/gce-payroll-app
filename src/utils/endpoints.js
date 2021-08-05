@@ -1,0 +1,1 @@
+export const payrollEndpoint = 'api/payrol';
